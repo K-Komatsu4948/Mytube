@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'sessions/new'
   get 'sessions/create'
   get 'sessions/destroy'
+  
   root to: 'toppages#index'
   
   get 'login', to: 'sessions#new'
@@ -9,5 +10,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   
   get 'signup', to: 'users#new'
-  resources :users, only: [:new, :create]
+  resources :users do
+    get :search, on: :collection
+  end
 end
