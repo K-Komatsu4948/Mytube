@@ -15,13 +15,6 @@ class UsersController < ApplicationController
     end
   end
   
-  def search
-    if params[:title].present?
-      @users = User.where('name LIKE ?', "%#{params[:title]}%")
-    else
-      @users = User.none
-    end
-  end
 
   private
 

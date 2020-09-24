@@ -58,4 +58,6 @@ gem 'kaminari'
 
 gem 'dotenv-rails'
 
-gem 'google-api-client', '0.9.20', require: 'google/apis/youtube_v3'
+gem 'pry-byebug', group: :development
+
+gem 'google-api-client', '0.9.20'

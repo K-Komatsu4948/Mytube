@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   
   get 'signup', to: 'users#new'
   resources :users do
+  end
+  resources :toppages do
     get :search, on: :collection
   end
 end
