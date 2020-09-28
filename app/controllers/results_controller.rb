@@ -3,6 +3,6 @@ class ResultsController < ApplicationController
   def index
     @results = @result_data
     
-    @results = Result.order(id: :desc).page(params[:page]).per(10)
+    @results = Result.order(id: :desc).page(params[:page]).per(5)
   end
 end
