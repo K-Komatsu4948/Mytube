@@ -1,0 +1,23 @@
+<% if logged_in? %>
+  <p>ログイン完了ユーザ: <%= current_user.name %></p>
+  <div class="container">
+    <table calss="table">
+      <thead>
+        <tr>
+          <th>検索履歴</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>
+              <% @results.each do |result| %>
+                <p class="border"><%= result.content %></p>
+              <% end %>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <%= render 'sessions/new' %>
+<% end %>

@@ -2,9 +2,10 @@
   <p>ログイン完了ユーザ: <%= current_user.name %></p>
   <div class="container ">
     <form class="form-inline">
-  <%= form_with model: @result, method: "GET", local: true do |f| %>
+  <%= form_with(model: @result, local: true, method: :get, class: "search-form" ) do |f| %>
     <div class="col-md-12 px-0 row">
-      <%= f.text_field :content, value: @params  %>
+      <%= f.label :content, '検索', value: @result %>
+      <%= f.text_field :content, placeholder: "検索する", class: "search-input" %>
       <%= f.submit '検索', class: 'btn btn-primary' %>
     </div>
   <% end %>
@@ -19,7 +20,7 @@
 
   <tbody>
       <td>
-        <% @youtube_data.items.each do |item| %>
+        <% @data.items.each do |item| %>
           <% snippet = item.snippet %>
           <p><%= snippet.title %></p>
           <p><%= snippet.published_at %><%= snippet.channel_title %></p>

@@ -1,21 +1,26 @@
 class ToppagesController < ApplicationController
-  before_action :require_user_logged_in, only: [:index]
+  before_action :require_user_logged_in
 require 'google/apis/youtube_v3'
 require 'active_support/all'
 
 GOOGLE_API_KEY = ENV['KEY']
-def index
-  @params  = result_params
-  @youtube_data = find_videos(@params)
-end
+  def index
+    @data = find_videos(params[:content])
+    
+    @result_data = current_user.results.find_or_create_by(content: params[:content])
+    if @result_data
+      render:index
+    else
+      render :index
+    end
+  end
 
   def find_videos(keyword, after: 1.months.ago, before: Time.now)
     service = Google::Apis::YoutubeV3::YouTubeService.new
     service.key = GOOGLE_API_KEY
-
     next_page_token = nil
     opt = {
-      q: :keyword,
+      q: keyword,
       type: 'video',
       max_results: 1,
       order: :date,
@@ -23,9 +28,7 @@ end
       published_after: after.iso8601,
       published_before: before.iso8601
     }
-    @youtube_data = service.list_searches(:snippet, opt)
-  end
-  def result_params
-    params.permit(:content)
+    service.list_searches(:snippet, opt)
+    
   end
 end
