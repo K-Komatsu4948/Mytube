@@ -6,6 +6,12 @@ require 'active_support/all'
 GOOGLE_API_KEY = ENV['KEY']
   def index
     @data = find_videos(params[:content])
+    if @data
+      flash[:success] = '検索に成功しました。'
+    else
+      flash.now[:danger] = '検索上限を超えたため失敗しました。'
+      render :login
+    end
     
     @result_data = current_user.results.find_or_create_by(content: params[:content])
     if @result_data
