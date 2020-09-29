@@ -14,7 +14,7 @@ GOOGLE_API_KEY = ENV['KEY']
         else
           render :index
         end
-    rescue => @error
+    rescue => e
       puts "検索上限を超えたため検索に失敗しました。"
     end
   end
