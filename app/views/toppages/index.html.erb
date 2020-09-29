@@ -2,7 +2,7 @@
   <p>ログイン完了ユーザ: <%= current_user.name %></p>
   <div class="container ">
     <form class="form-inline">
-  <%= form_with(model: @result, local: true, method: :get, class: "search-form" ) do |f| %>
+  <%= form_with(url: '/', local: true, method: :get) do |f| %>
     <div class="col-md-12 px-0 row">
       <%= f.label :content, '検索', value: @result %>
       <%= f.text_field :content, placeholder: "検索する", class: "search-input" %>
@@ -11,7 +11,7 @@
   <% end %>
   </div>
 <div class="container">
-<table calss="table">
+<table class="table">
   <thead>
   <tr>
     <th>Videos</th>
@@ -20,14 +20,16 @@
 
   <tbody>
     <% begin %>
+    <tr>
       <td>
         <% @data.items.each do |item| %>
           <% snippet = item.snippet %>
           <p><%= snippet.title %></p>
           <p><%= snippet.published_at %><%= snippet.channel_title %></p>
-          <div><iframe width="560" height="315" src="https://www.youtube.com/embed/<%= item.id.video_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div><iframe width="560" height="315" src="https://www.youtube.com/embed/<%= item.id.video_id %>" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         <% end %>
       </td>
+    </tr>
     <% rescue %>
      <%= puts "検索上限を超えたため、検索に失敗しました" %>
     <% end %>

@@ -1,7 +1,7 @@
 <% if logged_in? %>
   <p>ログイン完了ユーザ: <%= current_user.name %></p>
   <div class="container">
-    <table calss="table">
+    <table class="table">
       <thead>
         <tr>
           <th>検索履歴</th>
@@ -11,7 +11,7 @@
           <tr>
             <td>
               <% @results.each do |result| %>
-                <p class="border"><%= result.content %></p>
+                <p><%= result.content %></p>
               <% end %>
             </td>
           </tr>
