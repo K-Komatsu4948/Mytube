@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   
-  get 'search', to: 'results#index'
+  get 'history', to: 'results#index'
   get 'signup', to: 'users#new'
   resources :users do
   end
